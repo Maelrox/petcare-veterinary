@@ -7,4 +7,6 @@ interface VeterinaryPersistencePort {
 
      fun findAll(veterinaryId: Long?, companyId: Long): List<Veterinary>
 
+     fun save(veterinary: Veterinary): Veterinary
+
 }

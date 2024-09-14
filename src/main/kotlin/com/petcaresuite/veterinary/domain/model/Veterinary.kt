@@ -6,5 +6,6 @@ data class Veterinary(
     val identificationTypeId: Int,
     val name: String,
     val phone: String?,
-    val specialization: String?
+    val specialization: String?,
+    val companyId: Long?,
 )

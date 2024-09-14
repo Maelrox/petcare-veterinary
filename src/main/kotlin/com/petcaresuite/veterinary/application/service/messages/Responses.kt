@@ -1,6 +1,6 @@
-package com.petcaresuite.appointment.application.service.messages
+package com.petcaresuite.veterinary.application.service.messages
 
 object Responses {
-    const val APPOINTMENT_SCHEDULED = "Appointment Scheduled"
+    const val VETERINARY_CREATED = "Veterinary Created"
 
 }

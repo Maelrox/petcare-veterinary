@@ -7,10 +7,10 @@ import org.mapstruct.Mapper
 @Mapper(componentModel = "spring")
 interface VeterinaryEntityMapper {
 
-    fun toEntity(roleModel: Veterinary): VeterinaryEntity
+    fun toEntity(veterinary: Veterinary): VeterinaryEntity
 
-    fun toDomain(roleEntity: VeterinaryEntity): Veterinary
+    fun toDomain(veterinaryEntity: VeterinaryEntity): Veterinary
 
-    fun toDomain(appointments: List<VeterinaryEntity>): List<Veterinary>
+    fun toDomain(veterinaries: List<VeterinaryEntity>): List<Veterinary>
 
 }

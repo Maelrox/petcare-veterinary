@@ -17,4 +17,10 @@ class VeterinaryRepositoryAdapter(
         return veterinaryMapper.toDomain(veterinaries)
     }
 
+    override fun save(veterinary: Veterinary): Veterinary {
+        val veterinaryEntity = veterinaryMapper.toEntity(veterinary)
+        jpaVeterinaryRepository.save(veterinaryEntity)
+        return veterinaryMapper.toDomain(veterinaryEntity)
+    }
+
 }
