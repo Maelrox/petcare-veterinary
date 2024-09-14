@@ -36,10 +36,10 @@ class OwnerRepositoryAdapter(
         return ownerMapper.toDomain(ownerEntity)
     }
 
-    override fun save(veterinary: Owner): Owner {
-        val veterinaryEntity = ownerMapper.toEntity(veterinary)
-        jpaOwnerRepository.save(veterinaryEntity)
-        return ownerMapper.toDomain(veterinaryEntity)
+    override fun save(owner: Owner): Owner {
+        val ownerEntity = ownerMapper.toEntity(owner)
+        jpaOwnerRepository.save(ownerEntity)
+        return ownerMapper.toDomain(ownerEntity)
     }
 
     override fun findAllByFilterPaginated(filter: Owner, pageable: Pageable): Page<Owner> {

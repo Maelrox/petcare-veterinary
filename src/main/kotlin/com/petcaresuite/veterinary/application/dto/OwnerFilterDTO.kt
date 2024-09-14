@@ -10,4 +10,5 @@ data class OwnerFilterDTO(
     val name: String?,
     val address: String?,
     val phone: String?,
+    var companyId: Long?
 )

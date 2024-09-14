@@ -6,7 +6,6 @@ import com.petcaresuite.veterinary.application.dto.VeterinaryFilterDTO
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 
-
 interface VeterinaryUseCase {
     
     fun getAll(veterinaryId: Long?, companyId: Long): List<VeterinaryDTO>
