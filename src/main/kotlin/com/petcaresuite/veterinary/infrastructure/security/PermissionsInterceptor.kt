@@ -1,7 +1,6 @@
 package com.petcaresuite.veterinary.infrastructure.security
 
-import com.petcaresuite.appointment.infrastructure.rest.ManagementClient
-import com.petcaresuite.appointment.infrastructure.security.Permissions
+import com.petcaresuite.veterinary.infrastructure.rest.ManagementClient
 import jakarta.servlet.http.HttpServletRequest
 import jakarta.servlet.http.HttpServletResponse
 import org.springframework.beans.factory.ObjectProvider
