@@ -1,0 +1,13 @@
+package com.petcaresuite.veterinary.application.dto
+
+import com.fasterxml.jackson.annotation.JsonInclude
+
+@JsonInclude(JsonInclude.Include.NON_NULL)
+data class OwnerFilterDTO(
+    val ownerId: Long?,
+    val identification: String?,
+    val identificationTypeId: Int?,
+    val name: String?,
+    val address: String?,
+    val phone: String?,
+)

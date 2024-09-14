@@ -11,18 +11,18 @@ import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
 @RestController
-@RequestMapping()
-class VeterinaryController(private val veterinaryUseCase: VeterinaryUseCase) {
+@RequestMapping("/owner")
+class OwnerController(private val veterinaryUseCase: VeterinaryUseCase) {
 
     @GetMapping()
-    @Permissions(Modules.VETERINARY, ModuleActions.VIEW)
+    @Permissions(Modules.OWNERS, ModuleActions.VIEW)
     fun getVeterinary(@RequestParam(required = false) veterinaryId: Long?, request: HttpServletRequest): ResponseEntity<List<VeterinaryDTO>> {
         val companyId  = request.getAttribute("companyId").toString().toLong()
         return ResponseEntity.ok(veterinaryUseCase.getAll(veterinaryId, companyId))
     }
 
     @PostMapping()
-    @Permissions(Modules.VETERINARY, ModuleActions.CREATE)
+    @Permissions(Modules.OWNERS, ModuleActions.CREATE)
     fun saveVeterinary(@RequestBody veterinaryDTO: VeterinaryDTO, request: HttpServletRequest): ResponseEntity<ResponseDTO> {
         val companyId  = request.getAttribute("companyId").toString().toLong()
         veterinaryDTO.companyId = companyId
@@ -30,7 +30,7 @@ class VeterinaryController(private val veterinaryUseCase: VeterinaryUseCase) {
     }
 
     @PutMapping()
-    @Permissions(Modules.VETERINARY, ModuleActions.UPDATE)
+    @Permissions(Modules.OWNERS, ModuleActions.UPDATE)
     fun updateVeterinary(@RequestBody veterinaryDTO: VeterinaryDTO, request: HttpServletRequest): ResponseEntity<ResponseDTO> {
         val companyId  = request.getAttribute("companyId").toString().toLong()
         veterinaryDTO.companyId = companyId
@@ -38,7 +38,7 @@ class VeterinaryController(private val veterinaryUseCase: VeterinaryUseCase) {
     }
 
     @GetMapping("/search")
-    @Permissions(Modules.VETERINARY, ModuleActions.VIEW)
+    @Permissions(Modules.OWNERS, ModuleActions.VIEW)
     fun getAllPermissionsByFilter(@ModelAttribute filterDTO: VeterinaryFilterDTO, @RequestParam(defaultValue = "0") page: Int, @RequestParam(defaultValue = "30") size: Int, request: HttpServletRequest): ResponseEntity<PaginatedResponseDTO<VeterinaryDTO>> {
         val pageable = PageRequest.of(page, size)
         val companyId  = request.getAttribute("companyId").toString().toLong()
@@ -59,6 +59,5 @@ class VeterinaryController(private val veterinaryUseCase: VeterinaryUseCase) {
 
         return ResponseEntity.ok(paginatedResponse)
     }
-
 
 }

@@ -6,5 +6,6 @@ object Modules {
     const val APPOINTMENTS = "Appointment"
     const val FINANCES = "Finances"
     const val VETERINARY = "Veterinary"
+    const val OWNERS = "Owners"
 
 }
