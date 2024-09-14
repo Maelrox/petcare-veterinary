@@ -1,4 +1,4 @@
-package com.petcaresuite.appointment.application.dto
+package com.petcaresuite.veterinary.application.dto
 
 data class ResponseDTO(
     val success: Boolean?,

@@ -1,6 +1,6 @@
 package com.petcaresuite.veterinary.application.mapper
 
-import com.petcaresuite.appointment.application.dto.VeterinaryDTO
+import com.petcaresuite.veterinary.application.dto.VeterinaryDTO
 import com.petcaresuite.veterinary.domain.model.Veterinary
 import org.mapstruct.Mapper
 

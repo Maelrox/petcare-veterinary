@@ -1,6 +1,6 @@
 package com.petcaresuite.veterinary.infrastructure.config
 
-import com.petcaresuite.appointment.infrastructure.security.PermissionsInterceptor
+import com.petcaresuite.veterinary.infrastructure.security.PermissionsInterceptor
 import org.springframework.context.annotation.Configuration
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer

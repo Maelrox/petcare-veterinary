@@ -12,7 +12,7 @@ class VeterinaryRepositoryAdapter(
     private val veterinaryMapper: VeterinaryEntityMapper
 ) : VeterinaryPersistencePort {
 
-    override fun findAll(veterinaryId: Long, companyId: Long): List<Veterinary> {
+    override fun findAll(veterinaryId: Long?, companyId: Long): List<Veterinary> {
         val veterinaries = jpaVeterinaryRepository.findAllByVetIdAndCompanyId(veterinaryId, companyId)
         return veterinaryMapper.toDomain(veterinaries)
     }

@@ -1,7 +1,7 @@
 package com.petcaresuite.veterinary.interfaces.exception
 
-import com.petcaresuite.appointment.application.dto.ErrorResponseDTO
 import com.petcaresuite.appointment.application.service.messages.InternalErrors
+import com.petcaresuite.veterinary.application.dto.ErrorResponseDTO
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.http.HttpStatus

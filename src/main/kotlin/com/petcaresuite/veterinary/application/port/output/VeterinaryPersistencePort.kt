@@ -5,6 +5,6 @@ import com.petcaresuite.veterinary.domain.model.Veterinary
 
 interface VeterinaryPersistencePort {
 
-     fun findAll(veterinaryId: Long, companyId: Long): List<Veterinary>
+     fun findAll(veterinaryId: Long?, companyId: Long): List<Veterinary>
 
 }
