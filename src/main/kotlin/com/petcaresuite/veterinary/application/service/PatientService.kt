@@ -24,14 +24,14 @@ class PatientService(
     override fun save(patientDTO: PatientDTO): ResponseDTO {
         val patient = patientMapper.toDomain(patientDTO)
         patientPersistencePort.save(patient)
-        return ResponseDTO(message = Responses.VETERINARY_CREATED)
+        return ResponseDTO(message = Responses.PATIENT_CREATED)
     }
 
     override fun update(patientDTO: PatientDTO): ResponseDTO? {
         val patient = patientMapper.toDomain(patientDTO)
         patientPersistencePort.findById(patient.patientId!!)
         patientPersistencePort.update(patient)
-        return ResponseDTO(message = Responses.VETERINARY_UPDATED)
+        return ResponseDTO(message = Responses.PATIENT_UPDATED)
     }
 
     override fun getAllByFilterPaginated(filterDTO: PatientFilterDTO, pageable: Pageable): Page<PatientDTO> {

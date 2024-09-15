@@ -16,7 +16,7 @@ interface JpaPatientRepository : JpaRepository<PatientEntity, Long> {
         AND p.owner.companyId = :companyId
     """)
     fun findAllByPatientIdAndCompanyId(
-        @Param("veterinaryId") patientId: Long?,
+        @Param("patientId") patientId: Long?,
         @Param("companyId") companyId: Long
     ): List<PatientEntity>
 

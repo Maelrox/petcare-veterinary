@@ -7,5 +7,6 @@ object Modules {
     const val FINANCES = "Finances"
     const val VETERINARY = "Veterinary"
     const val OWNERS = "Owners"
+    const val PATIENTS = "Patients"
 
 }

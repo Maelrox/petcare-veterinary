@@ -24,14 +24,14 @@ class OwnerService(
     override fun save(ownerDTO: OwnerDTO): ResponseDTO {
         val veterinary = ownerMapper.toDomain(ownerDTO)
         ownerPersistencePort.save(veterinary)
-        return ResponseDTO(message = Responses.VETERINARY_CREATED)
+        return ResponseDTO(message = Responses.OWNER_CREATED)
     }
 
     override fun update(ownerDTO: OwnerDTO): ResponseDTO? {
         val veterinary = ownerMapper.toDomain(ownerDTO)
         ownerPersistencePort.findById(ownerDTO.ownerId!!)
         ownerPersistencePort.update(veterinary)
-        return ResponseDTO(message = Responses.VETERINARY_UPDATED)
+        return ResponseDTO(message = Responses.OWNER_UPDATED)
     }
 
     override fun getAllByFilterPaginated(filterDTO: OwnerFilterDTO, pageable: Pageable): Page<OwnerDTO> {
