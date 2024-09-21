@@ -16,14 +16,14 @@ class OwnerController(private val ownerUseCase: OwnerUseCase) {
 
     @GetMapping()
     @Permissions(Modules.OWNERS, ModuleActions.VIEW)
-    fun getVeterinary(@RequestParam(required = false) veterinaryId: Long?, request: HttpServletRequest): ResponseEntity<List<OwnerDTO>> {
+    fun getOwner(@RequestParam(required = false) ownerId: Long?, request: HttpServletRequest): ResponseEntity<List<OwnerDTO>> {
         val companyId  = request.getAttribute("companyId").toString().toLong()
-        return ResponseEntity.ok(ownerUseCase.getAll(veterinaryId, companyId))
+        return ResponseEntity.ok(ownerUseCase.getAll(ownerId, companyId))
     }
 
     @PostMapping()
     @Permissions(Modules.OWNERS, ModuleActions.CREATE)
-    fun saveVeterinary(@RequestBody ownerDTO: OwnerDTO, request: HttpServletRequest): ResponseEntity<ResponseDTO> {
+    fun saveOwner(@RequestBody ownerDTO: OwnerDTO, request: HttpServletRequest): ResponseEntity<ResponseDTO> {
         val companyId  = request.getAttribute("companyId").toString().toLong()
         ownerDTO.companyId = companyId
         return ResponseEntity.ok(ownerUseCase.save(ownerDTO))
@@ -31,7 +31,7 @@ class OwnerController(private val ownerUseCase: OwnerUseCase) {
 
     @PutMapping()
     @Permissions(Modules.OWNERS, ModuleActions.UPDATE)
-    fun updateVeterinary(@RequestBody ownerDTO: OwnerDTO, request: HttpServletRequest): ResponseEntity<ResponseDTO> {
+    fun updateOwner(@RequestBody ownerDTO: OwnerDTO, request: HttpServletRequest): ResponseEntity<ResponseDTO> {
         val companyId  = request.getAttribute("companyId").toString().toLong()
         ownerDTO.companyId = companyId
         return ResponseEntity.ok(ownerUseCase.update(ownerDTO))

@@ -15,8 +15,8 @@ class PatientRepositoryAdapter(
     private val patientMapper: PatientEntityMapper
 ) : PatientPersistencePort {
 
-    override fun findAll(patientId: Long?, companyId: Long): List<Patient> {
-        val owners = jpaPatientRepository.findAllByPatientIdAndCompanyId(patientId, companyId)
+    override fun findAll(ownerId: Long?, companyId: Long): List<Patient> {
+        val owners = jpaPatientRepository.findAllByPatientIdAndCompanyId(ownerId, companyId)
         return patientMapper.toDomain(owners)
     }
 

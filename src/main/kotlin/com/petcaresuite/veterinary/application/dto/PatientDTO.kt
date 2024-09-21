@@ -7,7 +7,7 @@ import com.petcaresuite.veterinary.domain.model.Owner
 data class PatientDTO(
     val patientId: Long?,
     val name: String,
-    val species: String,
+    val specie: SpecieDTO,
     val breed: String?,
     val age: String?,
     var companyId: Long?,

@@ -16,8 +16,9 @@ data class PatientEntity(
     @Column(name = "breed", length = 24)
     val breed: String?,
 
-    @Column(name = "species", length = 24)
-    val species: String?,
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "specie_id", nullable = false)
+    val specie: SpecieEntity?,
 
     @Column(name = "age")
     val age: Int?,

@@ -12,11 +12,11 @@ interface JpaPatientRepository : JpaRepository<PatientEntity, Long> {
 
     @Query("""
         SELECT p FROM PatientEntity p 
-        WHERE (:patientId IS NULL OR p.patientId = :patientId) 
+        WHERE (:ownerId IS NULL OR p.owner.ownerId = :ownerId) 
         AND p.owner.companyId = :companyId
     """)
     fun findAllByPatientIdAndCompanyId(
-        @Param("patientId") patientId: Long?,
+        @Param("ownerId") ownerId: Long?,
         @Param("companyId") companyId: Long
     ): List<PatientEntity>
 
@@ -25,7 +25,7 @@ interface JpaPatientRepository : JpaRepository<PatientEntity, Long> {
             SELECT p FROM PatientEntity p
             WHERE p.owner.companyId = :#{#filter.companyId}
             AND (:#{#filter.breed} IS NULL OR p.breed = :#{#filter.breed})
-            AND (:#{#filter.species} IS NULL OR p.species = :#{#filter.species})
+            AND (:#{#filter.specie} IS NULL OR p.specie.name = :#{#filter.specie?.name})
             AND (:#{#filter.ownerId} IS NULL OR p.owner.ownerId = :#{#filter.ownerId})
             AND (
                 :#{#filter.name} IS NULL 

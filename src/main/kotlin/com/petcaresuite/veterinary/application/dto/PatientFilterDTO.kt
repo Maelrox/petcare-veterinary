@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonInclude
 data class PatientFilterDTO(
     val patientId: Long?,
     val name: String?,
-    val species: String?,
+    val species: SpecieFilterDTO?,
     val breed: String?,
     val age: String?,
     var companyId: Long?,

@@ -6,7 +6,7 @@ import org.springframework.data.domain.Pageable
 
 interface PatientPersistencePort {
 
-     fun findAll(patientId: Long?, companyId: Long): List<Patient>
+     fun findAll(ownerId: Long?, companyId: Long): List<Patient>
 
      fun save(patient: Patient): Patient
 

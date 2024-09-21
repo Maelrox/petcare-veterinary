@@ -16,9 +16,9 @@ class PatientController(private val patientUseCase: PatientUseCase) {
 
     @GetMapping()
     @Permissions(Modules.PATIENTS, ModuleActions.VIEW)
-    fun getPatients(@RequestParam(required = false) patientId: Long?, request: HttpServletRequest): ResponseEntity<List<PatientDTO>> {
+    fun getPatients(@RequestParam(required = false) ownerId: Long?, request: HttpServletRequest): ResponseEntity<List<PatientDTO>> {
         val companyId  = request.getAttribute("companyId").toString().toLong()
-        return ResponseEntity.ok(patientUseCase.getAll(patientId, companyId))
+        return ResponseEntity.ok(patientUseCase.getAll(ownerId, companyId))
     }
 
     @PostMapping()
