@@ -31,6 +31,10 @@ interface JpaPatientRepository : JpaRepository<PatientEntity, Long> {
                 :#{#filter.name} IS NULL 
                 OR LOWER(p.name) LIKE LOWER(CONCAT('%', :#{#filter.name}, '%'))
             ) 
+            AND (
+                :#{#filter.ownerName} IS NULL 
+                OR LOWER(p.owner.name) LIKE LOWER(CONCAT('%', :#{#filter.ownerName}, '%'))
+            ) 
             ORDER BY p.patientId desc 
             """
     )

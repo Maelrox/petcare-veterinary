@@ -8,5 +8,6 @@ data class Patient(
     val age: Int?,
     val owner: Owner?,
     val ownerId: Long?,
-    val companyId: Long?
+    val companyId: Long?,
+    val ownerName: String?,
 )

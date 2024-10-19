@@ -12,4 +12,6 @@ data class PatientFilterDTO(
     var companyId: Long?,
     var owner: OwnerFilterDTO?,
     var ownerId: Long?,
-)
+    var ownerName: String?,
+
+    )
