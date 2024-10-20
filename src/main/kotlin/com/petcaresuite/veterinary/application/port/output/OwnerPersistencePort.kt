@@ -6,7 +6,7 @@ import org.springframework.data.domain.Pageable
 
 interface OwnerPersistencePort {
 
-     fun findAll(ownerId: Long?, companyId: Long): List<Owner>
+     fun findAll(ownerId: Long?, identification: String?, name: String?, companyId: Long): List<Owner>
 
      fun save(owner: Owner): Owner
 

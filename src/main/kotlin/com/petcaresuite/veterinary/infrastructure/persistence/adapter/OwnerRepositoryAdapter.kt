@@ -19,8 +19,8 @@ class OwnerRepositoryAdapter(
     private val ownerMapper: OwnerEntityMapper
 ) : OwnerPersistencePort {
 
-    override fun findAll(ownerId: Long?, companyId: Long): List<Owner> {
-        val owners = jpaOwnerRepository.findAllByVetIdAndCompanyId(ownerId, companyId)
+    override fun findAll(ownerId: Long?, identification: String?, name: String?, companyId: Long): List<Owner> {
+        val owners = jpaOwnerRepository.findAllByFilter(ownerId, identification, name, companyId)
         return ownerMapper.toDomain(owners)
     }
 

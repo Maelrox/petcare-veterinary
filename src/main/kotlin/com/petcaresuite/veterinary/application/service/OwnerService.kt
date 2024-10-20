@@ -16,8 +16,8 @@ class OwnerService(
 ) :
     OwnerUseCase {
 
-    override fun getAll(ownerId: Long?, companyId: Long): List<OwnerDTO> {
-        val owners = ownerPersistencePort.findAll(ownerId, companyId)
+    override fun getAll(ownerId: Long?, identification: String?, name: String?, companyId: Long): List<OwnerDTO> {
+        val owners = ownerPersistencePort.findAll(ownerId, identification, name, companyId)
         return ownerMapper.toDTO(owners)
     }
 

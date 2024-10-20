@@ -16,9 +16,12 @@ class OwnerController(private val ownerUseCase: OwnerUseCase) {
 
     @GetMapping()
     @Permissions(Modules.OWNERS, ModuleActions.VIEW)
-    fun getOwner(@RequestParam(required = false) ownerId: Long?, request: HttpServletRequest): ResponseEntity<List<OwnerDTO>> {
+    fun getOwner(@RequestParam(required = false) ownerId: Long?,
+                 @RequestParam(required = false) identification: String?,
+                 @RequestParam(required = false) name: String?,
+                 request: HttpServletRequest): ResponseEntity<List<OwnerDTO>> {
         val companyId  = request.getAttribute("companyId").toString().toLong()
-        return ResponseEntity.ok(ownerUseCase.getAll(ownerId, companyId))
+        return ResponseEntity.ok(ownerUseCase.getAll(ownerId, identification, name, companyId))
     }
 
     @PostMapping()

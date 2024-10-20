@@ -2,6 +2,7 @@ package com.petcaresuite.veterinary.infrastructure.persistence.repository
 
 import com.petcaresuite.veterinary.domain.model.Owner
 import com.petcaresuite.veterinary.infrastructure.persistence.entity.OwnerEntity
+import com.petcaresuite.veterinary.infrastructure.persistence.entity.VeterinaryEntity
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.data.jpa.repository.JpaRepository
@@ -11,14 +12,21 @@ import org.springframework.data.repository.query.Param
 interface JpaOwnerRepository : JpaRepository<OwnerEntity, Long> {
 
     @Query("""
-        SELECT v FROM VeterinaryEntity v 
-        WHERE (:veterinaryId IS NULL OR v.vetId = :veterinaryId) 
-        AND v.companyId = :companyId
+        SELECT o FROM OwnerEntity o 
+        WHERE (:#{#ownerId} IS NULL OR o.ownerId = :ownerId) 
+        AND (:#{#identification} IS NULL OR o.identification = :identification)
+        AND o.companyId = :companyId
+        AND (
+            :#{#name} IS NULL OR LOWER(o.name) LIKE LOWER(CONCAT('%', :#{#name}, '%'))
+        )
     """)
-    fun findAllByVetIdAndCompanyId(
-        @Param("veterinaryId") veterinaryId: Long?,
+    fun findAllByFilter(
+        @Param("ownerId") ownerId: Long?,
+        @Param("identification") identification: String?,
+        @Param("name") name: String?,
         @Param("companyId") companyId: Long
     ): List<OwnerEntity>
+
 
     @Query(
         """

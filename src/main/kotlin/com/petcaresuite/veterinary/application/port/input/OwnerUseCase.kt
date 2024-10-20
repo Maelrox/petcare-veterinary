@@ -6,7 +6,7 @@ import org.springframework.data.domain.Pageable
 
 interface OwnerUseCase {
     
-    fun getAll(ownerId: Long?, companyId: Long): List<OwnerDTO>
+    fun getAll(ownerId: Long?, identification: String?, name: String?, companyId: Long): List<OwnerDTO>
 
     fun save(ownerDTO: OwnerDTO): ResponseDTO
 
