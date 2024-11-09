@@ -8,9 +8,9 @@ interface SpecieUseCase {
     
     fun getAll(): List<SpecieDTO>
 
-    fun save(patientDTO: SpecieDTO): ResponseDTO
+    fun save(specieDTO: SpecieDTO): ResponseDTO
 
-    fun update(patientDTO: SpecieDTO): ResponseDTO?
+    fun update(specieDTO: SpecieDTO): ResponseDTO?
 
     fun getAllByFilterPaginated(filterDTO: SpecieFilterDTO, pageable: Pageable):   Page<SpecieDTO>
 

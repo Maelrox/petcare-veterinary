@@ -16,8 +16,8 @@ class PatientService(
 ) :
     PatientUseCase {
 
-    override fun getAll(ownerId: Long?, companyId: Long): List<PatientDTO> {
-        val owners = patientPersistencePort.findAll(ownerId, companyId)
+    override fun getAll(patientId: Long?, companyId: Long): List<PatientDTO> {
+        val owners = patientPersistencePort.findAll(patientId, companyId)
         return patientMapper.toDTO(owners)
     }
 

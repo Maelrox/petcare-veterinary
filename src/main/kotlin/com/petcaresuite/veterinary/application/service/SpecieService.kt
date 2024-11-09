@@ -21,9 +21,9 @@ class SpecieService(
         return specieMapper.toDTO(owners)
     }
 
-    override fun save(patientDTO: SpecieDTO): ResponseDTO {
-        val patient = specieMapper.toDomain(patientDTO)
-        speciePersistencePort.save(patient)
+    override fun save(specieDTO: SpecieDTO): ResponseDTO {
+        val specie = specieMapper.toDomain(specieDTO)
+        speciePersistencePort.save(specie)
         return ResponseDTO(message = Responses.SPECIE_UPDATED)
     }
 
