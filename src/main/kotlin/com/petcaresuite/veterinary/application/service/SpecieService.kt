@@ -38,6 +38,7 @@ class SpecieService(
         val filter = specieMapper.toDomain(filterDTO)
         return speciePersistencePort.findAllByFilterPaginated(filter, pageable)
             .map { specieMapper.toDTO(it) }
+
     }
 
 }
