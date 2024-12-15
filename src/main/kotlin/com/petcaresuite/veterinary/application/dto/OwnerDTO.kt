@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonInclude
 data class OwnerDTO(
     val ownerId: Long?,
     val identification: String,
-    val identificationTypeId: Int,
+    val identificationType: IdentificationTypeDTO,
     val name: String?,
     val address: String?,
     val phone: String?,

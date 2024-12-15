@@ -25,7 +25,7 @@ interface JpaVeterinaryRepository : JpaRepository<VeterinaryEntity, Long> {
             SELECT v FROM VeterinaryEntity v 
             WHERE v.companyId = :#{#filter.companyId}
             AND (:#{#filter.identification} IS NULL OR v.identification = :#{#filter.identification})
-            AND (:#{#filter.identificationTypeId} IS NULL OR v.identificationTypeId = :#{#filter.identificationTypeId})
+            AND (:#{#filter.identificationType} IS NULL OR v.identificationType.id = COALESCE(:#{#filter.identificationType?.id}, v.identificationType.id))
             AND (:#{#filter.specialization} IS NULL OR v.specialization = :#{#filter.specialization})
             AND (:#{#filter.phone} IS NULL OR v.phone = :#{#filter.phone})
             AND (

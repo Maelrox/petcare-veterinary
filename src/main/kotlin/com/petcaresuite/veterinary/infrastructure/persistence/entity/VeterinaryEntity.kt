@@ -13,8 +13,9 @@ data class VeterinaryEntity(
     @Column(name = "identification", nullable = false, length = 64)
     val identification: String,
 
-    @Column(name = "identification_type_id", nullable = false)
-    val identificationTypeId: Int,
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "identification_type_id")
+    val identificationType: IdentificationTypeEntity,
 
     @Column(name = "name", length = 100)
     val name: String?,

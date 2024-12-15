@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonInclude
 data class VeterinaryDTO(
     val vetId: Long?,
     val identification: String,
-    val identificationTypeId: Int,
+    val identificationType: IdentificationTypeDTO,
     val name: String?,
     val phone: String?,
     val specialization: String?,

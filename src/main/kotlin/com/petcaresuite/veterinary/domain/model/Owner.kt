@@ -6,6 +6,6 @@ data class Owner(
     val name: String?,
     val address: String?,
     val phone: String?,
-    val identificationTypeId: Int?,
+    val identificationType: IdentificationType?,
     val companyId: Long?,
 )

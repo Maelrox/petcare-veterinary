@@ -33,7 +33,7 @@ interface JpaOwnerRepository : JpaRepository<OwnerEntity, Long> {
             SELECT o FROM OwnerEntity o
             WHERE o.companyId = :#{#filter.companyId}
             AND (:#{#filter.identification} IS NULL OR o.identification = :#{#filter.identification})
-            AND (:#{#filter.identificationTypeId} IS NULL OR o.identificationTypeId = :#{#filter.identificationTypeId})
+            AND (:#{#filter.identificationType} IS NULL OR o.identificationType.id = COALESCE(:#{#filter.identificationType?.id}, o.identificationType.id))
             AND (:#{#filter.address} IS NULL OR o.address = :#{#filter.address})
             AND (:#{#filter.phone} IS NULL OR o.phone = :#{#filter.phone})
             AND (
