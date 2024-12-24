@@ -1,6 +1,7 @@
 package com.petcaresuite.veterinary.application.port.output
 
 import com.petcaresuite.veterinary.domain.model.Patient
+import com.petcaresuite.veterinary.domain.model.PatientFiles
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 

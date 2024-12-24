@@ -17,4 +17,6 @@ interface PatientUseCase {
 
     fun attachFile(file: MultipartFile, patientId: Long, companyId: Long, description: String): ResponseDTO?
 
+    fun listPatientFiles(patientId: Long, companyId: Long): List<PatientFilesDTO>?
+
 }

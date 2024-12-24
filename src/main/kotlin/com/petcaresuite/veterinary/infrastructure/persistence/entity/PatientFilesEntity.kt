@@ -25,5 +25,5 @@ data class PatientFilesEntity(
     val fileDate: LocalDateTime = LocalDateTime.now(),
 
     @Column(name = "file_path", nullable = false)
-    val filePath: String
+    var filePath: String
 )

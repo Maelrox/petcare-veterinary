@@ -55,6 +55,17 @@ class PatientController(
         return ResponseEntity.ok(response)
     }
 
+    @GetMapping("/{patientId}/patientFiles")
+    @Permissions(Modules.PATIENTS, ModuleActions.VIEW)
+    fun listFiles(
+        @PathVariable patientId: Long,
+        request: HttpServletRequest
+    ): ResponseEntity<List<PatientFilesDTO>> {
+        val companyId = request.getAttribute("companyId").toString().toLong()
+        val response = patientService.listPatientFiles(patientId, companyId)
+        return ResponseEntity.ok(response)
+    }
+
     @GetMapping("/search")
     @Permissions(Modules.PATIENTS, ModuleActions.VIEW)
     fun getAllPermissionsByFilter(@ModelAttribute filterDTO: PatientFilterDTO, @RequestParam(defaultValue = "0") page: Int, @RequestParam(defaultValue = "30") size: Int, request: HttpServletRequest): ResponseEntity<PaginatedResponseDTO<PatientDTO>> {

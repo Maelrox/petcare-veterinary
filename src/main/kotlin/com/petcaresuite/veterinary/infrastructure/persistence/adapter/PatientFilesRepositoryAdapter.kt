@@ -9,6 +9,7 @@ import com.petcaresuite.veterinary.infrastructure.persistence.mapper.PatientFile
 import com.petcaresuite.veterinary.infrastructure.persistence.repository.JpaPatientFilesRepository
 import com.petcaresuite.veterinary.infrastructure.persistence.repository.JpaPatientRepository
 import jakarta.persistence.EntityNotFoundException
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.Pageable
 import org.springframework.stereotype.Component
@@ -18,6 +19,9 @@ class PatientFilesRepositoryAdapter(
     private val jpaPatientFilesRepository: JpaPatientFilesRepository,
     private val patientFilesEntityMapper: PatientFilesEntityMapper
 ) : PatientFilesPersistencePort {
+
+    @Value("\${file.storage-host}")
+    private lateinit var storageHost: String
 
     override fun findAll(patientFilesId: Long?, companyId: Long): List<PatientFiles> {
         val patientFiles = jpaPatientFilesRepository.findAllByPatientPatientIdAndCompanyId(patientFilesId, companyId)
@@ -40,10 +44,23 @@ class PatientFilesRepositoryAdapter(
         jpaPatientFilesRepository.deleteById(patientFiles.fileId!!)
     }
 
+    override fun findAllByPatientId(patientId: Long, companyId: Long): List<PatientFiles> {
+        val patientFiles = jpaPatientFilesRepository.findAllByPatientPatientIdAndCompanyId(patientId, companyId)
+        patientFiles.forEach {
+            // Extract the file name from the file path
+            val fileName = it.filePath.substringAfterLast('/', it.filePath.substringAfterLast('\\'))
+
+            // Form the new URL using the provided structure
+            it.filePath = "$storageHost/${it.companyId}/${it.patient.patientId}/$fileName"
+        }
+        return patientFilesEntityMapper.toDomain(patientFiles)
+    }
+
     override fun save(patientFiles: PatientFiles): PatientFiles {
         val patientEntity = patientFilesEntityMapper.toEntity(patientFiles)
         jpaPatientFilesRepository.save(patientEntity)
         return patientFilesEntityMapper.toDomain(patientEntity)
     }
+
 
 }

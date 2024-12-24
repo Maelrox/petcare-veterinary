@@ -3,6 +3,7 @@ package com.petcaresuite.veterinary.infrastructure.persistence.adapter
 import com.petcaresuite.veterinary.application.port.output.PatientPersistencePort
 import com.petcaresuite.veterinary.domain.model.Patient
 import com.petcaresuite.veterinary.infrastructure.persistence.mapper.PatientEntityMapper
+import com.petcaresuite.veterinary.infrastructure.persistence.repository.JpaPatientFilesRepository
 import com.petcaresuite.veterinary.infrastructure.persistence.repository.JpaPatientRepository
 import jakarta.persistence.EntityNotFoundException
 import org.springframework.data.domain.Page
@@ -12,7 +13,7 @@ import org.springframework.stereotype.Component
 @Component
 class PatientRepositoryAdapter(
     private val jpaPatientRepository: JpaPatientRepository,
-    private val patientMapper: PatientEntityMapper
+    private val patientMapper: PatientEntityMapper,
 ) : PatientPersistencePort {
 
     override fun findAll(ownerId: Long?, companyId: Long): List<Patient> {

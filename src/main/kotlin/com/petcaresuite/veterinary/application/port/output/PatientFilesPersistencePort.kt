@@ -14,4 +14,5 @@ interface PatientFilesPersistencePort {
 
      fun deleteById(patientFiles: PatientFiles)
 
+     fun findAllByPatientId(patientId: Long, companyId: Long): List<PatientFiles>
 }

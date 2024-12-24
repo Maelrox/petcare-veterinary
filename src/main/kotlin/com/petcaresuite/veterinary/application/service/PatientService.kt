@@ -1,6 +1,7 @@
 package com.petcaresuite.veterinary.application.service
 
 import com.petcaresuite.veterinary.application.dto.*
+import com.petcaresuite.veterinary.application.mapper.PatientFilesMapper
 import com.petcaresuite.veterinary.application.mapper.PatientMapper
 import com.petcaresuite.veterinary.application.port.input.PatientUseCase
 import com.petcaresuite.veterinary.application.port.output.PatientFilesPersistencePort
@@ -20,6 +21,7 @@ class PatientService(
     private val patientFilesPersistencePort: PatientFilesPersistencePort,
     private val patientFilesStoragePort: PatientFilesStoragePort,
     private val patientMapper: PatientMapper,
+    private val patientFilesMapper: PatientFilesMapper
 ) :
     PatientUseCase {
 
@@ -49,7 +51,7 @@ class PatientService(
 
     override fun attachFile(file: MultipartFile, patientId: Long, companyId: Long, description: String): ResponseDTO? {
         val patient = patientPersistencePort.findById(patientId)
-        val filePath = patientFilesStoragePort.store(file)
+        val filePath = patientFilesStoragePort.store(file, companyId, patientId)
         val patientFiles = PatientFiles(
             0,
             patient = patient,
@@ -60,6 +62,10 @@ class PatientService(
         patientFilesPersistencePort.save(patientFiles)
         return ResponseDTO(message = Responses.PATIENT_UPDATED)
 
+    }
+
+    override fun listPatientFiles(patientId: Long, companyId: Long): List<PatientFilesDTO>? {
+        return patientFilesMapper.toDTO(patientFilesPersistencePort.findAllByPatientId(patientId, companyId))
     }
 
 }

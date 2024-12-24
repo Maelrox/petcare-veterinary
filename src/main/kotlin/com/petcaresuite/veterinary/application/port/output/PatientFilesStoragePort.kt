@@ -5,6 +5,6 @@ import java.nio.file.Path
 
 interface PatientFilesStoragePort {
 
-     fun store(file: MultipartFile): Path
+     fun store(file: MultipartFile, companyId: Long, patientId: Long): Path
 
 }

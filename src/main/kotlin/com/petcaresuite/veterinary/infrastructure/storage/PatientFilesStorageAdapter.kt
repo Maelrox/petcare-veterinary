@@ -1,4 +1,4 @@
-package com.petcaresuite.veterinary.infrastructure.persistence.adapter
+package com.petcaresuite.veterinary.infrastructure.storage
 
 import com.petcaresuite.veterinary.application.port.output.PatientFilesStoragePort
 import jakarta.annotation.PostConstruct
@@ -25,14 +25,22 @@ class PatientFilesStorageAdapter(
         }
     }
 
-    override fun store(file: MultipartFile): Path {
-        val targetLocation = Paths.get(uploadDir, file.originalFilename!!)
+    override fun store(file: MultipartFile, companyId: Long, patientId: Long): Path {
+        val targetDir = Paths.get(uploadDir, companyId.toString(), patientId.toString())
+        try {
+            if (!Files.exists(targetDir)) {
+                Files.createDirectories(targetDir)
+            }
+        } catch (e: IOException) {
+            throw RuntimeException("Failed to create directory: $targetDir", e)
+        }
+        val targetLocation = targetDir.resolve(file.originalFilename!!)
         try {
             file.inputStream.use { inputStream ->
                 Files.copy(inputStream, targetLocation)
             }
         } catch (e: IOException) {
-            throw RuntimeException("Failed to store file: ${file.originalFilename}", e)
+            throw RuntimeException("Failed to store file: ${file.originalFilename} in $targetDir", e)
         }
         return targetLocation
     }
