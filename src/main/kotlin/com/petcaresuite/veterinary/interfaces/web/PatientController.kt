@@ -3,16 +3,21 @@ package com.petcaresuite.veterinary.interfaces.web
 import com.petcaresuite.appointment.application.service.modules.ModuleActions
 import com.petcaresuite.veterinary.application.dto.*
 import com.petcaresuite.veterinary.application.port.input.PatientUseCase
+import com.petcaresuite.veterinary.application.service.PatientService
 import com.petcaresuite.veterinary.application.service.modules.Modules
 import com.petcaresuite.veterinary.infrastructure.security.Permissions
 import jakarta.servlet.http.HttpServletRequest
 import org.springframework.data.domain.PageRequest
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
+import org.springframework.web.multipart.MultipartFile
 
 @RestController
 @RequestMapping("/patient")
-class PatientController(private val patientUseCase: PatientUseCase) {
+class PatientController(
+    private val patientUseCase: PatientUseCase,
+    private val patientService: PatientService
+) {
 
     @GetMapping()
     @Permissions(Modules.PATIENTS, ModuleActions.VIEW)
@@ -29,13 +34,25 @@ class PatientController(private val patientUseCase: PatientUseCase) {
         return ResponseEntity.ok(patientUseCase.save(patientDTO))
     }
 
-
     @PutMapping()
     @Permissions(Modules.PATIENTS, ModuleActions.UPDATE)
     fun updatePatient(@RequestBody patientDTO: PatientDTO, request: HttpServletRequest): ResponseEntity<ResponseDTO> {
         val companyId  = request.getAttribute("companyId").toString().toLong()
         patientDTO.companyId = companyId
         return ResponseEntity.ok(patientUseCase.update(patientDTO))
+    }
+
+    @PutMapping("/{patientId}/patientFiles")
+    @Permissions(Modules.PATIENTS, ModuleActions.UPDATE)
+    fun attachFile(
+        @PathVariable patientId: Long,
+        @RequestParam("file") file: MultipartFile,
+        @RequestParam("description") description: String,
+        request: HttpServletRequest
+    ): ResponseEntity<ResponseDTO> {
+        val companyId = request.getAttribute("companyId").toString().toLong()
+        val response = patientService.attachFile(file, patientId, companyId, description)
+        return ResponseEntity.ok(response)
     }
 
     @GetMapping("/search")

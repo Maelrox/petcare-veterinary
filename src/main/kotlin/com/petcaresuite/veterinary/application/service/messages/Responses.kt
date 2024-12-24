@@ -7,6 +7,7 @@ object Responses {
     const val OWNER_UPDATED = "Owner Updated"
     const val PATIENT_CREATED = "Patient Created"
     const val PATIENT_UPDATED = "Patient Updated"
+    const val PATIENT_FILES_ATTACHED = "Patient Files Attached"
     const val SPECIE_CREATED = "Specie Created"
     const val SPECIE_UPDATED = "Specie Updated"
 }
